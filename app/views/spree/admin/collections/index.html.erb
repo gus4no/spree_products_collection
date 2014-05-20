@@ -1,0 +1,69 @@
+<% content_for :page_title do %>
+  <%= Spree.t('collections') %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:new_collection), new_admin_collection_url, :icon => 'icon-plus' %></li>
+<% end %>
+
+<% render 'spree/admin/shared/product_sub_menu' %>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t('search') %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_collections_index_search">
+
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="alpha sixteen columns">
+        <div class="field">
+          <%= label_tag nil, Spree.t(:name) %><br />
+          <%= f.text_field :name_cont, :size => 25 %>
+        </div>
+      </div>
+
+      <div class="clear"></div>
+
+      <div class="form-buttons actions filter-actions" data-hook="admin_collections_index_search_buttons">
+        <%= button Spree.t(:search), 'icon-search' %>
+      </div>
+    <%- end -%>
+  </div>
+<%- end -%>
+
+<% paginate @collections %>
+
+
+<% if @collections.any? %>
+  <table class="index" id='listing_collections' data-hook>
+    <colgroup>
+      <col style="width: 85%">
+      <col style="width: 15%">
+    </colgroup>
+    <thead>
+    <tr data-hook="listing_collections_header">
+      <th><%= Spree.t(:name) %></th>
+      <th class="actions"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @collections.each do |collection| %>
+      <tr id="<%= spree_dom_id collection %>" data-hook="listing_collections_row" class="<%= cycle('odd', 'even')%>">
+        <td style="padding-left:1em"><%= collection.name %></td>
+        <td class="actions">
+          <%= link_to_edit(collection, :no_text => true) %>
+          <%= link_to_delete(collection, :no_text => true) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/property')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_collection_path %>!
+  </div>
+<% end %>
+
+<%= paginate @collections -%>

@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+  <%= Spree.t('collections') %>
+<% end %>
+
+
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @property } %>
+
+<%= form_for [:admin, @collection] do |f| %>
+  <fieldset data-hook="new_collection">
+    <legend align="center"><%= Spree.t(:new_collection) %></legend>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <div class="filter-actions">
+      <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+    </div>
+  </fieldset>
+<% end %>
