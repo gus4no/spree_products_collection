@@ -7,6 +7,10 @@ module Spree
     def to_param
       slug
     end
-    
+
+    def products_count
+      products.count
+    end
+
   end
 end
