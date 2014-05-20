@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.description = 'Helps you to create product collections and group products'
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
+  s.author    = 'Gustavo Robles'
+  s.email     = 'gustavo.robles@crowdint.com'
   # s.homepage  = 'http://www.spreecommerce.com'
 
   #s.files       = `git ls-files`.split("\n")
