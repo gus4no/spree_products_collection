@@ -4,6 +4,9 @@ module Spree
     has_many :products, through: :products_collections
     has_many :taxons, through: :products
 
+    validates :name, presence: true
+    validates :slug, presence: true
+
     def to_param
       slug
     end
