@@ -24,3 +24,5 @@ module Spree
 
   end
 end
+
+require_dependency 'spree/collection/scopes'
