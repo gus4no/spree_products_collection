@@ -5,7 +5,9 @@ module Spree
       before_filter :find_collection, except: [:index, :create]
 
       def index
-        @collections = Spree::Collection.all
+        @collections = Spree::Collection.ransack(params[:q]).result
+        @collections = @collections.in_taxons(build_taxons_params) if params[:taxons]
+        @collections.page(params[:page]).per(params[:per_page])
       end
 
       def show;end
@@ -36,6 +38,10 @@ module Spree
       end
 
       private
+
+      def build_taxons_params
+        params[:taxons].split(",").map(&:to_i)
+      end
 
       def find_collection
         @collection = Spree::Collection.find_by slug: params[:id]
