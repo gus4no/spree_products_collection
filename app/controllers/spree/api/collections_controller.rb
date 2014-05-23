@@ -44,7 +44,7 @@ module Spree
       end
 
       def find_collection
-        @collection = Spree::Collection.find_by slug: params[:id]
+        @collection = Spree::Collection.find params[:id]
       end
 
       def collection_params
