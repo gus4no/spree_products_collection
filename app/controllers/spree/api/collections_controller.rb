@@ -47,8 +47,12 @@ module Spree
         @collection = Spree::Collection.find params[:id]
       end
 
+      def permitted_collection_attributes
+        [:name, :slug, :product_ids]
+      end
+
       def collection_params
-        params.require(:collection).permit(:name, :slug)
+        params.require(:collection).permit(permitted_collection_attributes)
       end
     end
   end
