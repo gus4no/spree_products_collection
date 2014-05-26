@@ -15,7 +15,7 @@ module Spree
       end
 
       def collection_params
-        params.require(:collection).permit(:name, :slug)
+        params.require(:collection).permit(:name, :slug, product_ids: [])
       end
     end
   end
