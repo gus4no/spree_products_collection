@@ -7,7 +7,7 @@ module Spree
     validates :name, presence: true
     validates :slug, presence: true
 
-    before_validation :normalize_slug, on: :update
+    before_validation :normalize_slug, on: [:update, :create]
 
     def to_param
       slug
